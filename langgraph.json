@@ -1,0 +1,24 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "invoice_pipeline": "./ap_automation/graph/graph.py:build_graph"
+  },
+  "env": ".env",
+  "env_vars": [
+    "LANGGRAPH_API_URL",
+    "LANGGRAPH_API_KEY",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "QDRANT_HOST",
+    "QDRANT_PORT",
+    "QDRANT_API_KEY",
+    "QDRANT_COLLECTION",
+    "LANGFUSE_PUBLIC_KEY",
+    "LANGFUSE_SECRET_KEY",
+    "LANGFUSE_HOST",
+    "SUPABASE_URL",
+    "SUPABASE_SECRET_KEY",
+    "TELEMETRY_ENABLED",
+    "API_KEY"
+  ]
+}

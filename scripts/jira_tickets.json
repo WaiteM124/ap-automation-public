@@ -1,0 +1,687 @@
+{
+  "_comment": "Edit wording freely. Fields per ticket: summary (unique), status (todo|in_progress|done), status_note, priority (Highest|High|Medium|Low|Lowest), labels (no spaces; 'ap-automation' is always added), sections [{heading, paragraphs[], bullets[]}], acceptance_criteria[], links[]. Use `backticks` for inline code/paths. Summaries are the idempotency key: changing one makes the script treat it as a new ticket.",
+  "common_links": [
+    "docs/evaluation.json",
+    "docs/evaluation_live.json",
+    "docs/evaluation_live_large.json",
+    "docs/evaluation_live_run2.json",
+    "scripts/evaluate_poc.py",
+    "docs/Best In Class/v2/"
+  ],
+  "epic": {
+    "summary": "AP Automation POC",
+    "priority": "High",
+    "labels": [
+      "epic"
+    ],
+    "sections": [
+      {
+        "heading": "Goal",
+        "paragraphs": [
+          "Prove that a self-learning, governed GL-coding system can auto-post a meaningful share of non-PO invoices at a very low false-positive rate, first in shadow mode on a client's own history, before any live posting.",
+          "Plan order: client pilot first (data access, discovery, one agreed success number), then the numbered steps below."
+        ]
+      },
+      {
+        "heading": "Scope",
+        "bullets": [
+          "Non-PO invoice GL coding via retrieval, a governed confidence gate and a human-in-the-loop write-back",
+          "Evaluation on synthetic data (done), public data (rehearsal) and the client's real history (the number that matters)",
+          "Client onboarding: data-readiness check, shadow mode, go/no-go"
+        ]
+      }
+    ],
+    "acceptance_criteria": [
+      "Headline success number agreed with the client and measured on their data in shadow mode",
+      "All child tickets Done or consciously deferred to the Later backlog"
+    ]
+  },
+  "tickets": [
+    {
+      "summary": "Client pilot: data access, discovery and success metric",
+      "priority": "Highest",
+      "labels": [
+        "client",
+        "discovery",
+        "data-access",
+        "governance"
+      ],
+      "sections": [
+        {
+          "heading": "Why",
+          "paragraphs": [
+            "Everything downstream depends on the client's real history. This is the first thing to unblock: without data access and an agreed success number, the evaluation numbers cannot be quoted."
+          ]
+        },
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Data-sharing agreement, NDA and DPA in place before any data moves",
+            "Confirm the ERP, and the non-PO invoice volume per month",
+            "Obtain 12 months of confirmed invoices with fields: vendor, description, amount, currency, entity, cost centre, posted GL code",
+            "Decide where it runs: data stays in a client-controlled environment (not the Render free tier)",
+            "Agree ONE headline success number up front, e.g. auto-post X% of non-PO invoices at under 1% false positives in shadow mode"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Data-sharing agreement, NDA and DPA signed",
+        "ERP and monthly non-PO invoice volume confirmed in writing",
+        "12 months of confirmed invoices received with all seven required fields",
+        "Hosting location agreed: client-controlled environment, data never on the Render free tier",
+        "Headline success metric (X% auto-post at under 1% false positives, shadow mode) agreed and recorded"
+      ],
+      "links": [
+        "docs/Best In Class/v2/Client_Onboarding_Guide_v2.docx",
+        "docs/Best In Class/v2/AI_Compliance_Governance.docx"
+      ]
+    },
+    {
+      "summary": "Embeddings model: fix text-embedding-3-small and record it in evaluations",
+      "status": "done",
+      "status_note": "The live evaluation is finished; one small follow-up remains (record the model name in the evaluation JSON).",
+      "priority": "Medium",
+      "labels": [
+        "embeddings",
+        "evaluation"
+      ],
+      "sections": [
+        {
+          "heading": "Result",
+          "paragraphs": [
+            "Live OpenAI `text-embedding-3-small` run on the synthetic set versus the control:"
+          ],
+          "bullets": [
+            "Automation 76.6% vs 68.0% control",
+            "Auto-post accuracy 99.5% (3 wrong of 613)",
+            "21/21 anomalies caught; 187/187 forced auto-posts refused; 0 learned",
+            "Repeatable to within one invoice across runs",
+            "`text-embedding-3-large` showed no measurable benefit"
+          ]
+        },
+        {
+          "heading": "Decision",
+          "paragraphs": [
+            "Use `text-embedding-3-small`. Fix the model and version before onboarding any client.",
+            "Reminder: `EMBEDDING_DIMENSIONS` must change with the model (3072 for 3-large); changing the model requires re-embedding the corpus."
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Model name and version pinned in configuration before client onboarding",
+        "TODO: record the embedding model name in the evaluation JSON output (`scripts/evaluate_poc.py`)",
+        "Note in the docs that EMBEDDING_DIMENSIONS must match the model (3072 for 3-large)"
+      ]
+    },
+    {
+      "summary": "Real-data evaluation on the client's history",
+      "priority": "Highest",
+      "labels": [
+        "real-data",
+        "evaluation"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "paragraphs": [
+            "Replay about 12 months of the client's history, with write-back, and report honestly."
+          ],
+          "bullets": [
+            "Report auto-post accuracy, false-positive rate, automation vs control, and calibration by confidence band",
+            "Check the current thresholds on real data: minimum evidence 3, MDM 0.85, agreement 0.80, confidence 0.50",
+            "Change thresholds only through the evaluation, never by hand-tuning against a single run"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Replay of about 12 months completed with write-back",
+        "Auto-post accuracy, false-positive rate, automation vs control and per-band calibration reported",
+        "Thresholds (min evidence 3, MDM 0.85, agreement 0.80, confidence 0.50) reviewed; any change justified by the evaluation",
+        "Results written to a dated evaluation JSON under docs/"
+      ]
+    },
+    {
+      "summary": "Public-data replay (rehearsal): City of Los Angeles Checkbook L.A.",
+      "status": "in_progress",
+      "status_note": "Another background task is currently building the replay.",
+      "priority": "Medium",
+      "labels": [
+        "real-data",
+        "public-data",
+        "rehearsal"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "paragraphs": [
+            "Stand-in and rehearsal for the real-data evaluation. Dataset: City of Los Angeles Checkbook L.A. (Socrata dataset `pggv-e4fn`, CC BY 4.0)."
+          ],
+          "bullets": [
+            "NEVER use account_name, expenditure_type or item_code_name as features: they leak the label",
+            "Run the same replay and reporting as the client evaluation so the pipeline is rehearsed end to end"
+          ]
+        },
+        {
+          "heading": "Limits to state with every number",
+          "bullets": [
+            "Public-sector fund accounting",
+            "Mostly PO-linked spend",
+            "No VAT and no multi-entity",
+            "Labels are posted ledger values, not clerk decisions",
+            "Do NOT quote its accuracy as private-sector accuracy"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Replay completes using `scripts/replay_public_data.py` with the leakage columns excluded",
+        "Results report includes the limits listed above",
+        "Accuracy is labelled as a rehearsal number, not a private-sector claim"
+      ],
+      "links": [
+        "scripts/public_data_import.py",
+        "scripts/replay_public_data.py"
+      ]
+    },
+    {
+      "summary": "Data-readiness check for client onboarding",
+      "priority": "High",
+      "labels": [
+        "onboarding",
+        "data-quality"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Score a client's history on coding consistency, vendor coverage and chart-of-accounts match",
+            "Define a minimum score to go live",
+            "Clients below the minimum start in suggest-only mode",
+            "Learn the real bar from the first clients; do not over-fit the threshold up front"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Readiness score implemented with the three components and reported per client",
+        "Minimum go-live score defined and documented (provisional)",
+        "Failing clients are automatically placed in suggest-only mode",
+        "Process to revisit the bar after the first clients is written down"
+      ],
+      "links": [
+        "docs/Best In Class/v2/Client_Onboarding_Guide_v2.docx"
+      ]
+    },
+    {
+      "summary": "Ambiguity report: reduce ambiguous invoices over time",
+      "priority": "High",
+      "labels": [
+        "ambiguity",
+        "data-quality",
+        "client",
+        "feature"
+      ],
+      "sections": [
+        {
+          "heading": "Why",
+          "paragraphs": [
+            "In the Checkbook L.A. replay 89% of vendors used more than one account code and nearly all review reasons were 'evidence disagrees'. More data alone did not remove that ambiguity (automation rose from about 63% to 67% and then levelled off), because the ambiguity comes from how the organisation codes invoices. Reducing it needs decisions from the client's team, not just learning."
+          ]
+        },
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Ambiguity report for a client: list vendors and description patterns where past coding is split, with the accounts used and how often, ranked by invoice volume",
+            "Let the client's team confirm the preferred rule for each ambiguous pattern (for example 'cleaning goes to 6300 unless it is for the warehouse'); record the decision, who made it and when",
+            "Feed confirmed rules back so those cases become automatable, and keep them auditable and versioned",
+            "Track 'share of invoices in ambiguous vendors' month by month as a metric",
+            "Flag near-duplicate accounts in the chart of accounts that clerks use interchangeably",
+            "Keep clerk effort light: one short confirmation per ambiguous pattern, ranked by volume"
+          ]
+        },
+        {
+          "heading": "Notes",
+          "paragraphs": [
+            "Frame it to the client as improving the consistency of their own coding with their team, not as replacing clerks; clerk cooperation is what supplies the corrections the system learns from."
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Report generated from a client's history (public LA data used as the rehearsal), showing split-coded vendors and patterns ranked by volume",
+        "Confirmed rules are stored with author and timestamp, and applied by the gate in a versioned, replayable way",
+        "Ambiguous-vendor share is reported per month and shown trending in the shadow-mode report",
+        "Measured effect: automation and auto-post accuracy before and after confirming the top N ambiguous patterns"
+      ],
+      "links": [
+        "docs/public_replay_live.json",
+        "docs/Best In Class/v2/Client_Onboarding_Guide_v2.docx"
+      ]
+    },
+    {
+      "summary": "Test the untested paths: live Claude LLM gate and specialist-agent ablation",
+      "priority": "High",
+      "labels": [
+        "testing",
+        "llm-gate",
+        "agents"
+      ],
+      "sections": [
+        {
+          "heading": "Live Claude LLM gate",
+          "bullets": [
+            "Escalation-only: it may only ever tighten a decision, never loosen it",
+            "Measure the escalation rate",
+            "Define and test behaviour when the LLM is unavailable (fail safe)"
+          ]
+        },
+        {
+          "heading": "Ablation of specialist agents",
+          "paragraphs": [
+            "Ablate the entity, VAT and cost-centre agents one at a time. Measure errors prevented vs correct auto-posts blocked. `vat_review_required` is the largest review reason, so start there."
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Live Claude gate run on the evaluation set; escalation rate reported",
+        "Test proves the gate can only tighten (never turn a refusal into an auto-post)",
+        "Behaviour when the LLM is unavailable is tested and documented",
+        "Ablation report for entity, VAT and cost-centre agents: errors prevented vs correct auto-posts blocked"
+      ],
+      "links": [
+        "docs/Best In Class/v2/Testing_Strategy_v2.docx"
+      ]
+    },
+    {
+      "summary": "Shadow mode with a client: 30 days predicting without posting",
+      "priority": "High",
+      "labels": [
+        "shadow-mode",
+        "client",
+        "go-no-go"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Run for 30 days predicting GL codes without posting anything",
+            "Go/no-go: false-positive rate under 1% of would-be auto-posts",
+            "Clients below the readiness score start in suggest-only mode"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "30 days of shadow predictions captured against actual clerk postings",
+        "False-positive rate computed as a share of would-be auto-posts; go/no-go recorded (under 1% to go)",
+        "Readiness-score gate applied: below-threshold clients stay suggest-only",
+        "Results reviewed with the client against the agreed headline success number"
+      ]
+    },
+    {
+      "summary": "Housekeeping: rotate secrets, fix CI token scope, check env vars and deck numbers",
+      "priority": "High",
+      "labels": [
+        "housekeeping",
+        "security",
+        "ci"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Rotate the GitHub tokens (currently embedded in git remote URLs) and the Render key",
+            "Issue a token with the `workflow` scope so CI files (`.github/workflows/ci.yml`) can be pushed",
+            "Confirm Vercel and Render environment variables: AP_API_URL and AP_API_KEY",
+            "Check whether the business-case deck or client packs reuse old fabricated UI numbers"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "GitHub tokens rotated and git remote URLs no longer contain credentials",
+        "Render key rotated and redeployed",
+        "New GitHub token with `workflow` scope can push CI files",
+        "AP_API_URL and AP_API_KEY verified on Vercel and Render",
+        "Business-case deck and client packs checked; any old fabricated UI numbers replaced with evaluation-backed numbers"
+      ],
+      "links": [
+        ".github/workflows/ci.yml",
+        "render.yaml",
+        "docs/Best In Class/v2/Deployment_Infrastructure_v2.docx"
+      ]
+    },
+    {
+      "summary": "Gate and retrieval tuning on the public replay (LA Checkbook)",
+      "priority": "Highest",
+      "labels": [
+        "gate",
+        "retrieval",
+        "evaluation",
+        "public-data"
+      ],
+      "sections": [
+        {
+          "heading": "Why",
+          "paragraphs": [
+            "First real-data replay: automation 65.1% (control 53.2%), auto-post accuracy 87.0%, GL accuracy 74.0%, vendor-most-common baseline 70.0%. The gate is too loose for vendors with mixed coding; retrieval ignores department, fund and amount; accuracy decays from about 91% to 80% over the year."
+          ]
+        },
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Department, fund and amount band as extra evidence signals (config flag, off by default)",
+            "Stricter gate: agreement, minimum evidence, top-account margin, diversity-scaled evidence",
+            "Recency weighting against drift",
+            "Coverage-versus-accuracy curve; coverage reachable at 95%, 98% and 99% auto-post accuracy",
+            "Tune on early months, report on held-out later months, with confidence intervals"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Variants compared on a held-out window with Wilson confidence intervals",
+        "Coverage at 95/98/99% auto-post accuracy reported, or shown unreachable",
+        "Default production behaviour and docs/evaluation.json numbers unchanged",
+        "Findings that generalise vs LA-specific effects stated explicitly"
+      ],
+      "links": [
+        "docs/public_replay_live.json",
+        "scripts/replay_public_data.py"
+      ],
+      "status": "in_progress"
+    },
+    {
+      "summary": "Calibrated confidence score",
+      "priority": "High",
+      "labels": [
+        "gate",
+        "calibration",
+        "evaluation"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Replace the hand-weighted 0.7/0.3 mix with a score fitted to observed outcomes (for example logistic regression on agreement, similarity, evidence count, vendor code diversity)",
+            "Fit per client on their own confirmed history; keep a simple fallback",
+            "Report calibration by band and expected calibration error before and after"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Calibration error reported on a held-out window and improved against the current score",
+        "Fitted parameters versioned and recorded with each prediction",
+        "A stated confidence band (for example 0.95+) maps to a measured accuracy"
+      ]
+    },
+    {
+      "summary": "Per-vendor thresholds and drift detection",
+      "priority": "High",
+      "labels": [
+        "gate",
+        "drift",
+        "evaluation"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Per-vendor adaptive thresholds: stricter for vendors with many distinct account codes, looser for single-code vendors with long history",
+            "Detect per-vendor drift (recent coding differs from long-run coding) and lower confidence or send to review",
+            "Monthly per-vendor accuracy monitoring in the performance view"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Measured effect on auto-post accuracy and coverage on the replay (held-out window)",
+        "Drift alerts raised in a replay where the coding of a vendor changes mid-year",
+        "Thresholds auditable and versioned"
+      ]
+    },
+    {
+      "summary": "Clerk measurement for shadow mode (override reasons, agreement, sampled review)",
+      "priority": "High",
+      "labels": [
+        "shadow-mode",
+        "client",
+        "governance",
+        "measurement"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Capture a short reason whenever a clerk overrides a suggestion (wrong department, policy changed, wrong account, other)",
+            "Record clerk identity and timestamp; measure agreement between clerks on the same vendor",
+            "Sampled blind review of would-be auto-posts to measure an honest false-positive rate",
+            "Measure time per invoice with and without suggestions",
+            "Keep clerk effort light: no extra clicks to confirm a correct suggestion",
+            "Only human-confirmed lines go into the corpus"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Override reasons stored and reported by category",
+        "Clerk-agreement measure reported per vendor",
+        "Random sample of would-be auto-posts reviewed each week with a reported error rate",
+        "Time-per-invoice comparison available for the manager report"
+      ],
+      "links": [
+        "docs/Best In Class/v2/Client_Onboarding_Guide_v2.docx"
+      ]
+    },
+    {
+      "summary": "Evidence panel and two-candidate suggestions in the review UI",
+      "priority": "Medium",
+      "labels": [
+        "ui",
+        "explainability",
+        "client"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Show similar past invoices behind each suggestion: description, account, who coded it, when, and similarity",
+            "When two accounts are close, show both candidates with their evidence so the clerk can pick quickly",
+            "Show any agent flag and the reason an invoice went to review"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Every suggestion lists its evidence with account, coder and date",
+        "Close calls show two candidates with a measured share of the vote",
+        "Clerks can accept or choose in one action"
+      ]
+    },
+    {
+      "summary": "Weekly manager report for shadow mode",
+      "priority": "Medium",
+      "labels": [
+        "shadow-mode",
+        "client",
+        "reporting"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "One page per week: invoices processed, share the system could have auto-posted, accuracy, false positives from the sampled review, time saved, ambiguity trend",
+            "Plain language for finance directors; numbers labelled as shadow-mode measurements",
+            "Export to PDF or a shareable page"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Report generated automatically from shadow-mode data",
+        "All figures traceable to the audit log",
+        "Reviewed with the client's finance lead before the first pilot"
+      ]
+    },
+    {
+      "summary": "Deterministic deployment profile for sceptical clients",
+      "priority": "High",
+      "labels": [
+        "determinism",
+        "governance",
+        "client",
+        "security"
+      ],
+      "sections": [
+        {
+          "heading": "Why",
+          "paragraphs": [
+            "One client wants everything deterministic and no AI at runtime, and distrusts RAG solutions. The decision path is already rule-based and the LLM gate can only escalate; this makes it explicit and verifiable."
+          ]
+        },
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Profile with a pinned embedding model or a local open model (no external calls at runtime)",
+            "LLM gate off by default; it can only ever send an invoice to review",
+            "Nightly batch learning with a versioned corpus snapshot; any prediction can be replayed exactly",
+            "Record model, configuration and corpus version with every prediction",
+            "Describe the system to this client as a transparent lookup of how their team coded similar invoices, with the evidence shown"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Replaying a stored prediction against its recorded corpus version gives the same result",
+        "No outbound AI calls in the deterministic profile (verified by test)",
+        "Provenance fields present in the audit record"
+      ],
+      "links": [
+        "docs/Best In Class/v2/AI_Compliance_Governance.docx"
+      ]
+    },
+    {
+      "summary": "Accountant review of methodology and a sample of results",
+      "priority": "Medium",
+      "labels": [
+        "validation",
+        "client",
+        "governance"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "After the first client data run, prepare an anonymised sample of about 100 lines (prediction, evidence, outcome, mix of right, wrong and reviewed) for blind review",
+            "Review the definition of 'correct', the VAT, entity and cost-centre logic, and the business case assumptions",
+            "Prefer an independent or client-side accountant; obtain a short written sign-off with caveats"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Sample file produced from real client results",
+        "Accountant's verdicts compared with system outcomes",
+        "Written sign-off or list of corrections received"
+      ]
+    },
+    {
+      "summary": "Business case and pitch: capacity framing and honest claims",
+      "priority": "Medium",
+      "labels": [
+        "business-case",
+        "client",
+        "documentation"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Frame the value as capacity, speed and auditability; do not promise removing clerks",
+            "Use shadow-mode measurements to price the saving per client",
+            "Show synthetic and public-data results side by side, labelled, including weaknesses",
+            "Check any deck or pack for the old fabricated UI numbers"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Pitch and business case contain no unmeasured accuracy claims",
+        "Cost-per-invoice and time-saved assumptions documented and reviewed",
+        "Old fabricated figures removed from all client-facing material"
+      ]
+    },
+    {
+      "summary": "Record the LA replay result in README and v2 docs",
+      "priority": "Medium",
+      "labels": [
+        "documentation",
+        "evaluation",
+        "honesty"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Add the public-data replay results next to the synthetic ones in the README and the v2 documents",
+            "State what the public data does and does not show (public-sector fund accounting, labels fixed at PO stage, no VAT)",
+            "Keep the synthetic 99.8% labelled as synthetic everywhere it appears"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "README and affected v2 documents updated and consistent with docs/public_replay_*.json",
+        "No document presents synthetic accuracy as real-world accuracy"
+      ],
+      "links": [
+        "docs/public_replay_offline.json",
+        "docs/public_replay_live.json"
+      ]
+    },
+    {
+      "summary": "Code hygiene: fix existing lint errors and commit the current work",
+      "priority": "Low",
+      "labels": [
+        "housekeeping",
+        "code-quality"
+      ],
+      "sections": [
+        {
+          "heading": "Scope",
+          "bullets": [
+            "Fix the roughly 30 existing ruff errors outside the governed paths",
+            "Commit and push the uncommitted work in sensible groups (docs, Jira tooling, replay scripts, evaluation outputs)",
+            "Keep data/public/ and jira_created.json out of git"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "ruff clean across the repository",
+        "All current work committed and pushed"
+      ]
+    },
+    {
+      "summary": "Later (backlog): advanced retrieval, scaling and platform work",
+      "priority": "Low",
+      "labels": [
+        "later",
+        "backlog"
+      ],
+      "sections": [
+        {
+          "heading": "Do not start before real-data results",
+          "paragraphs": [
+            "Park these until the real-data evaluation shows where the actual errors are."
+          ],
+          "bullets": [
+            "Cross-encoder re-ranking",
+            "Learned confidence weights",
+            "ColBERT",
+            "GraphRAG",
+            "Multimodal ingestion",
+            "Postgres",
+            "Multi-tenancy",
+            "OAuth / RBAC",
+            "Connectors"
+          ]
+        }
+      ],
+      "acceptance_criteria": [
+        "Real-data evaluation results reviewed before any item here is started",
+        "Each item split into its own ticket only when justified by an observed error mode"
+      ],
+      "links": [
+        "docs/Best In Class/v2/RAGbot_Best_In_Class_v2.docx",
+        "docs/Best In Class/v2/Data_Architecture_v2.docx",
+        "docs/Best In Class/v2/Middleware_Best_In_Class_v2.docx"
+      ]
+    }
+  ]
+}

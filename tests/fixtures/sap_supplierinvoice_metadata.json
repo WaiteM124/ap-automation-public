@@ -1,0 +1,702 @@
+{
+ "_source": "GET /sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV/$metadata on the SAP API Business Hub sandbox (public service definition; field names, max lengths, creatable flags only)",
+ "A_SupplierInvoiceType": {
+  "SupplierInvoice": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "FiscalYear": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "CompanyCode": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "DocumentDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "PostingDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "CreationDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": false
+  },
+  "SuplrInvcLstChgDteTmeTxt": {
+   "max": 23,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "SupplierInvoiceIDByInvcgParty": {
+   "max": 16,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "InvoicingParty": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "DocumentCurrency": {
+   "max": 5,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "InvoiceGrossAmount": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "UnplannedDeliveryCost": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "DocumentHeaderText": {
+   "max": 25,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ReconciliationAccount": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ManualCashDiscount": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "PaymentTerms": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "DueCalculationBaseDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "CashDiscount1Percent": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "CashDiscount1Days": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "CashDiscount2Percent": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "CashDiscount2Days": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "NetPaymentDays": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "PaymentBlockingReason": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "AccountingDocumentType": {
+   "max": 2,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JournalEntry": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "JournalEntryFiscalYear": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "JournalEntryCompanyCode": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "BPBankAccountInternalID": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierInvoiceStatus": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "IndirectQuotedExchangeRate": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "DirectQuotedExchangeRate": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "StateCentralBankPaymentReason": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplyingCountry": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaymentMethod": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaymentMethodSupplement": {
+   "max": 2,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaymentReference": {
+   "max": 30,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "InvoiceReference": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "InvoiceReferenceFiscalYear": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "FixedCashDiscount": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "UnplannedDeliveryCostTaxCode": {
+   "max": 2,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "UnplndDelivCostTaxJurisdiction": {
+   "max": 15,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "UnplndDeliveryCostTaxCountry": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "AssignmentReference": {
+   "max": 18,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierPostingLineItemText": {
+   "max": 50,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "TaxIsCalculatedAutomatically": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": true
+  },
+  "BusinessPlace": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "BusinessSectionCode": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "BusinessArea": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SuplrInvcIsCapitalGoodsRelated": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": true
+  },
+  "SupplierInvoiceIsCreditMemo": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaytSlipWthRefSubscriber": {
+   "max": 11,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaytSlipWthRefCheckDigit": {
+   "max": 2,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PaytSlipWthRefReference": {
+   "max": 27,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "TaxDeterminationDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "TaxReportingDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "TaxFulfillmentDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "InvoiceReceiptDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "DeliveryOfGoodsReportingCntry": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierVATRegistration": {
+   "max": 20,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "IsEUTriangularDeal": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": true
+  },
+  "SuplrInvcDebitCrdtCodeDelivery": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SuplrInvcDebitCrdtCodeReturns": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "RetentionDueDate": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "PaymentReason": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "HouseBank": {
+   "max": 5,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "HouseBankAccount": {
+   "max": 5,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "AlternativePayeePayer": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierInvoiceOrigin": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "ReverseDocument": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "ReverseDocumentFiscalYear": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "IsReversal": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": false
+  },
+  "IsReversed": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": false
+  },
+  "SupplierInvoicePaymentStatus": {
+   "max": 20,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "SupplierInvoiceApprovalStatus": {
+   "max": 40,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "IN_GSTPartner": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "IN_GSTPlaceOfSupply": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "IN_InvoiceReferenceNumber": {
+   "max": 64,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificRef1": {
+   "max": 80,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificDate1": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificRef2": {
+   "max": 25,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificDate2": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificRef3": {
+   "max": 25,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificDate3": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificRef4": {
+   "max": 50,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificDate4": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificRef5": {
+   "max": 50,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificDate5": {
+   "max": null,
+   "type": "Edm.DateTime",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificBP1": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "JrnlEntryCntrySpecificBP2": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  }
+ },
+ "A_SupplierInvoiceItemGLAcctType": {
+  "SupplierInvoice": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "FiscalYear": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "SupplierInvoiceItem": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "CompanyCode": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "CostCenter": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ControllingArea": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "BusinessArea": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ProfitCenter": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "FunctionalArea": {
+   "max": 16,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "GLAccount": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SalesOrder": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SalesOrderItem": {
+   "max": 6,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "CostObject": {
+   "max": 12,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "CostCtrActivityType": {
+   "max": 6,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "BusinessProcess": {
+   "max": 12,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "WBSElement": {
+   "max": 24,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "DocumentCurrency": {
+   "max": 5,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierInvoiceItemAmount": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "TaxCode": {
+   "max": 2,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "PersonnelNumber": {
+   "max": 8,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "WorkItem": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "DebitCreditCode": {
+   "max": 1,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "TaxJurisdiction": {
+   "max": 15,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SupplierInvoiceItemText": {
+   "max": 50,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "AssignmentReference": {
+   "max": 18,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "IsNotCashDiscountLiable": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": true
+  },
+  "InternalOrder": {
+   "max": 12,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ProjectNetwork": {
+   "max": 12,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "NetworkActivity": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "CommitmentItem": {
+   "max": 24,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "FundsCenter": {
+   "max": 16,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "TaxBaseAmountInTransCrcy": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "Fund": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "GrantID": {
+   "max": 20,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "QuantityUnit": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SuplrInvcItmQtyUnitSAPCode": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "SuplrInvcItmQtyUnitISOCode": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "Quantity": {
+   "max": null,
+   "type": "Edm.Decimal",
+   "creatable": true
+  },
+  "PartnerBusinessArea": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "FinancialTransactionType": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "TaxCountry": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "EarmarkedFundsDocument": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "EarmarkedFundsDocumentItem": {
+   "max": 3,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "BudgetPeriod": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ServiceDocument": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ServiceDocumentItem": {
+   "max": 6,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ServiceDocumentType": {
+   "max": 4,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "Material": {
+   "max": 40,
+   "type": "Edm.String",
+   "creatable": true
+  },
+  "ProfitabilitySegment": {
+   "max": 10,
+   "type": "Edm.String",
+   "creatable": false
+  },
+  "ProfitabilitySegmentIsDerived": {
+   "max": null,
+   "type": "Edm.Boolean",
+   "creatable": true
+  }
+ }
+}

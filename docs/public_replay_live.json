@@ -1,0 +1,668 @@
+{
+  "meta": {
+    "dataset": "Checkbook L.A. (City of Los Angeles Controller)",
+    "dataset_id": "pggv-e4fn",
+    "url": "https://controllerdata.lacity.org/resource/pggv-e4fn.csv",
+    "licence": "CC BY 4.0",
+    "attribution": "Source: Checkbook L.A., City of Los Angeles (controllerdata.lacity.org, dataset pggv-e4fn), CC BY 4.0",
+    "fiscal_year": 2026,
+    "population_filter": "fiscal_year=2026 AND expenditure_type='SUPPLIES & OTHER SERVICES' AND dollar_amount > 0 AND detailed_item_description IS NOT NULL AND detailed_item_description != '' AND vendor_id IS NOT NULL",
+    "normalisation": {
+      "input_rows": 515904,
+      "kept": 452651,
+      "dropped": {
+        "duplicate_line": 42990,
+        "privacy_masked_payee": 19793,
+        "empty_description": 470
+      }
+    },
+    "sample_params": {
+      "max_rows": 30000,
+      "max_per_vendor": 250,
+      "min_vendor_rows": 50,
+      "method": "busiest vendors by vendor_id; vendors > max_per_vendor thinned evenly in date order; rows kept in (transaction_date, :id) order",
+      "eligible_vendors": 552,
+      "vendors_in_population": 4965,
+      "population_rows": 452651,
+      "vendors_skipped_for_name_collision": 5
+    },
+    "sample_stats": {
+      "rows": 30000,
+      "vendors": 120,
+      "account_codes": 243,
+      "non_numeric_account_codes": 191,
+      "departments": 48,
+      "funds": 67,
+      "date_min": "2025-07-01",
+      "date_max": "2026-06-23",
+      "rows_per_vendor": {
+        "min": 250,
+        "median": 250,
+        "p90": 250,
+        "max": 250,
+        "mean": 250.0
+      },
+      "vendors_with_gt1_account_code": 107,
+      "share_vendors_with_gt1_account_code": 0.8917,
+      "distinct_codes_per_vendor_median": 6,
+      "vendors_with_top_code_share_ge_80pct": 54,
+      "share_vendors_with_top_code_share_ge_80pct": 0.45,
+      "row_weighted_top_code_share": 0.6977,
+      "top_account_codes": [
+        [
+          "003090",
+          6431
+        ],
+        [
+          "003040",
+          3698
+        ],
+        [
+          "50CX82",
+          1886
+        ],
+        [
+          "004200",
+          1731
+        ],
+        [
+          "006010",
+          1709
+        ],
+        [
+          "003160",
+          1680
+        ],
+        [
+          "40000A",
+          1621
+        ],
+        [
+          "006020",
+          1507
+        ],
+        [
+          "003230",
+          1031
+        ],
+        [
+          "003030",
+          946
+        ]
+      ],
+      "rows_with_po_num": 29338
+    },
+    "population_stats": {
+      "rows": 452651,
+      "vendors": 4965,
+      "account_codes": 1005,
+      "non_numeric_account_codes": 866,
+      "departments": 52,
+      "funds": 197,
+      "date_min": "2025-07-01",
+      "date_max": "2026-06-26",
+      "rows_per_vendor": {
+        "min": 1,
+        "median": 3,
+        "p90": 59,
+        "max": 33090,
+        "mean": 91.2
+      },
+      "vendors_with_gt1_account_code": 1401,
+      "share_vendors_with_gt1_account_code": 0.2822,
+      "distinct_codes_per_vendor_median": 1,
+      "vendors_with_top_code_share_ge_80pct": 3987,
+      "share_vendors_with_top_code_share_ge_80pct": 0.803,
+      "row_weighted_top_code_share": 0.7134,
+      "top_account_codes": [
+        [
+          "003090",
+          77554
+        ],
+        [
+          "003040",
+          66104
+        ],
+        [
+          "006010",
+          43690
+        ],
+        [
+          "006020",
+          25677
+        ],
+        [
+          "003230",
+          22255
+        ],
+        [
+          "50CX82",
+          21270
+        ],
+        [
+          "89740Y",
+          20338
+        ],
+        [
+          "40000A",
+          19501
+        ],
+        [
+          "004200",
+          18470
+        ],
+        [
+          "003160",
+          16505
+        ]
+      ],
+      "rows_with_po_num": 445078
+    },
+    "replay_params": {
+      "seed_months": 3,
+      "seed_cutoff_date": "2025-10-01",
+      "seed_lines": 6363,
+      "replay_lines": 22990,
+      "held_out_vendor_ids": [
+        "000001418",
+        "000003933",
+        "000004594",
+        "000010360",
+        "000022618",
+        "000024310",
+        "000026092",
+        "000045904",
+        "000050390",
+        "000051360"
+      ],
+      "dropped_held_out_seed_period_lines": 647,
+      "limit_replay": null,
+      "write_back_policy": "true account_code applied as clerk confirmation ONLY for lines routed to human review; auto-posts never written back; control never writes back",
+      "llm_gate": "off (batch_mode=True)",
+      "vector_store": {
+        "kind": "inproc",
+        "note": "inproc = vendor-indexed in-process stand-in for qdrant-client's local mode (scripts/inproc_vector_store.py); retrieval/BM25/RRF/confidence/gating code is the shipped code. On a 1,200-line check it matched qdrant-client local mode on 95% of lines (differences are tie-breaking between identical-description lines) and on aggregate metrics to ~2 pts."
+      }
+    },
+    "mapping": {
+      "vendor": "vendor_name (MDM canonical id = vendor_id)",
+      "description": "detailed_item_description",
+      "amount": "dollar_amount",
+      "currency": "USD",
+      "date": "transaction_date",
+      "entity": "department_name",
+      "cost_centre": "fund",
+      "label_gl_code": "account_code"
+    },
+    "leak_guard_columns": [
+      "account_name",
+      "expenditure_type",
+      "item_code",
+      "item_code_name"
+    ],
+    "embedder": {
+      "kind": "openai",
+      "model": "text-embedding-3-small",
+      "dimensions": 1536,
+      "method": "distinct cleaned descriptions embedded once in batches; the pipeline's embedder is a lookup into those vectors (identical to calling the API per line, just faster)",
+      "usage": {
+        "model": "text-embedding-3-small",
+        "distinct_texts": 14713,
+        "already_cached": 0,
+        "to_embed": 14713,
+        "estimated_tokens": 155859,
+        "token_count_method": "tiktoken cl100k_base",
+        "estimated_cost_usd": 0.00312,
+        "token_cap": 20000000,
+        "usd_cap": 0.5,
+        "price_per_million_tokens_usd": 0.02,
+        "actual_tokens": 155859,
+        "actual_cost_usd": 0.00312,
+        "api_requests": 58,
+        "seconds": 54.5,
+        "dimensions": 1536
+      }
+    },
+    "agents": {
+      "main_runs": "neutral",
+      "neutral_configuration": {
+        "entity_agent": "valid iff department is in the department master (all sample departments)",
+        "vat_agent": "NOT_APPLICABLE, never requires review (no VAT on this data)",
+        "cost_centre_agent": "shipped agent; skips itself because LA account codes are not in the synthetic chart of accounts",
+        "unchanged": "retrieval, confidence, rule gate, governance gate, write-back are the shipped code"
+      }
+    },
+    "seed": 42,
+    "git": {
+      "commit": "5c026c0ebac178806f6d0529cf7a2de1aec605c7",
+      "working_tree_dirty": true
+    },
+    "timestamp_utc": "2026-10-26T11:20:22+00:00",
+    "python": "3.14.9",
+    "wall_seconds_arms": 380.7
+  },
+  "with_learning": {
+    "invoices": 22990,
+    "automation_rate": 0.6511,
+    "auto_posted": 14968,
+    "auto_post_accuracy": 0.87,
+    "false_positives": 1946,
+    "false_positive_rate_of_auto_posts": 0.13,
+    "false_positive_rate_of_all_invoices": 0.0846,
+    "gl_accuracy_all_predictions": 0.7396,
+    "gl_accuracy_rows_with_a_prediction": 0.7399,
+    "review_rows": 8022,
+    "review_rows_where_prediction_was_correct": 3981,
+    "share_of_reviews_that_were_unnecessary": 0.4963,
+    "lines_learned": 8022,
+    "lines_learned_from_auto_posts": 0,
+    "review_reasons": {
+      "evidence_disagrees": 7989,
+      "no_or_thin_history": 33
+    },
+    "agent_flag_counts": {},
+    "new_to_corpus_vendors": {
+      "vendors": 11,
+      "invoices": 2103,
+      "automation_rate": 0.7546,
+      "auto_post_accuracy": 0.7341,
+      "gl_accuracy_all": 0.6562,
+      "vendors_that_ever_auto_posted": 11,
+      "reviews_before_first_auto_post_median": 3
+    },
+    "by_vendor_history_lines": [
+      {
+        "vendor_history_lines": "0",
+        "n": 11,
+        "automation_rate": 0.0,
+        "auto_post_accuracy": null,
+        "gl_accuracy": 0.0
+      },
+      {
+        "vendor_history_lines": "1-2",
+        "n": 22,
+        "automation_rate": 0.0,
+        "auto_post_accuracy": null,
+        "gl_accuracy": 0.6818
+      },
+      {
+        "vendor_history_lines": "3-9",
+        "n": 1802,
+        "automation_rate": 0.9861,
+        "auto_post_accuracy": 0.771,
+        "gl_accuracy": 0.7669
+      },
+      {
+        "vendor_history_lines": "10-49",
+        "n": 4102,
+        "automation_rate": 0.9227,
+        "auto_post_accuracy": 0.912,
+        "gl_accuracy": 0.8735
+      },
+      {
+        "vendor_history_lines": "50+",
+        "n": 17053,
+        "automation_rate": 0.5516,
+        "auto_post_accuracy": 0.8718,
+        "gl_accuracy": 0.705
+      }
+    ],
+    "calibration": {
+      "bins": [
+        {
+          "band": "<0.5",
+          "n": 2743,
+          "accuracy": 0.3292,
+          "mean_confidence": 0.4102,
+          "n_auto_posted": 0,
+          "auto_post_accuracy": null
+        },
+        {
+          "band": "0.5-0.7",
+          "n": 5582,
+          "accuracy": 0.5846,
+          "mean_confidence": 0.605,
+          "n_auto_posted": 1210,
+          "auto_post_accuracy": 0.638
+        },
+        {
+          "band": "0.7-0.85",
+          "n": 7183,
+          "accuracy": 0.8459,
+          "mean_confidence": 0.786,
+          "n_auto_posted": 6292,
+          "auto_post_accuracy": 0.873
+        },
+        {
+          "band": "0.85-0.95",
+          "n": 4495,
+          "accuracy": 0.8701,
+          "mean_confidence": 0.8901,
+          "n_auto_posted": 4493,
+          "auto_post_accuracy": 0.8702
+        },
+        {
+          "band": "0.95+",
+          "n": 2976,
+          "accuracy": 0.9577,
+          "mean_confidence": 0.9927,
+          "n_auto_posted": 2973,
+          "auto_post_accuracy": 0.9576
+        }
+      ],
+      "ece_all_predictions": 0.0418,
+      "note": "confidence = 0.7*agreement + 0.3*mean similarity of agreeing lines; a heuristic score, not a trained probability"
+    },
+    "learning_curve_by_month": [
+      {
+        "month": "2025-10",
+        "invoices": 2624,
+        "automation_rate": 0.6441,
+        "auto_post_accuracy": 0.9124,
+        "gl_accuracy_all": 0.7481
+      },
+      {
+        "month": "2025-11",
+        "invoices": 2057,
+        "automation_rate": 0.6155,
+        "auto_post_accuracy": 0.9005,
+        "gl_accuracy_all": 0.7394
+      },
+      {
+        "month": "2025-12",
+        "invoices": 2742,
+        "automation_rate": 0.6608,
+        "auto_post_accuracy": 0.8918,
+        "gl_accuracy_all": 0.7341
+      },
+      {
+        "month": "2026-01",
+        "invoices": 2132,
+        "automation_rate": 0.6604,
+        "auto_post_accuracy": 0.8835,
+        "gl_accuracy_all": 0.7636
+      },
+      {
+        "month": "2026-02",
+        "invoices": 2317,
+        "automation_rate": 0.6167,
+        "auto_post_accuracy": 0.9132,
+        "gl_accuracy_all": 0.7682
+      },
+      {
+        "month": "2026-03",
+        "invoices": 2501,
+        "automation_rate": 0.6785,
+        "auto_post_accuracy": 0.8998,
+        "gl_accuracy_all": 0.7801
+      },
+      {
+        "month": "2026-04",
+        "invoices": 2907,
+        "automation_rate": 0.6643,
+        "auto_post_accuracy": 0.8421,
+        "gl_accuracy_all": 0.7461
+      },
+      {
+        "month": "2026-05",
+        "invoices": 2860,
+        "automation_rate": 0.6507,
+        "auto_post_accuracy": 0.8221,
+        "gl_accuracy_all": 0.7
+      },
+      {
+        "month": "2026-06",
+        "invoices": 2850,
+        "automation_rate": 0.6575,
+        "auto_post_accuracy": 0.7962,
+        "gl_accuracy_all": 0.6933
+      }
+    ],
+    "vendor_most_common_baseline": {
+      "definition": "predict the vendor's most common TRUE account over all earlier lines (seed + every earlier replayed line, as if all were human-coded), on lines whose vendor was seen before",
+      "rows_with_vendor_seen_before": 22979,
+      "baseline_accuracy": 0.6998,
+      "system_gl_accuracy_same_rows": 0.7399,
+      "system_auto_post_accuracy_same_rows": 0.87,
+      "baseline_accuracy_on_the_rows_the_system_auto_posted": 0.8538,
+      "same_history_variant": {
+        "definition": "baseline restricted to the lines this arm's corpus holds (seed + write-backs)",
+        "rows": 22979,
+        "baseline_accuracy": 0.6946
+      }
+    },
+    "enforcement": {
+      "forced_auto_post_attempts": 8022,
+      "refused": 8022
+    },
+    "agents_run_counts": {
+      "entity_agent": 22990,
+      "vat_agent": 22990
+    },
+    "seed_lines": 6363,
+    "seeded_vendors": 109,
+    "seconds": 376.4,
+    "agents_configuration": "neutral",
+    "replay_cutoff": "2025-10-01"
+  },
+  "no_learning_control": {
+    "invoices": 22990,
+    "automation_rate": 0.5318,
+    "auto_posted": 12227,
+    "auto_post_accuracy": 0.883,
+    "false_positives": 1431,
+    "false_positive_rate_of_auto_posts": 0.117,
+    "false_positive_rate_of_all_invoices": 0.0622,
+    "gl_accuracy_all_predictions": 0.6355,
+    "gl_accuracy_rows_with_a_prediction": 0.6995,
+    "review_rows": 10763,
+    "review_rows_where_prediction_was_correct": 3814,
+    "share_of_reviews_that_were_unnecessary": 0.3544,
+    "lines_learned": 0,
+    "lines_learned_from_auto_posts": 0,
+    "review_reasons": {
+      "evidence_disagrees": 8660,
+      "no_or_thin_history": 2103
+    },
+    "agent_flag_counts": {},
+    "new_to_corpus_vendors": {
+      "vendors": 11,
+      "invoices": 2103,
+      "automation_rate": 0.0,
+      "auto_post_accuracy": null,
+      "gl_accuracy_all": 0.0,
+      "vendors_that_ever_auto_posted": 0,
+      "reviews_before_first_auto_post_median": null
+    },
+    "by_vendor_history_lines": [
+      {
+        "vendor_history_lines": "0",
+        "n": 2103,
+        "automation_rate": 0.0,
+        "auto_post_accuracy": null,
+        "gl_accuracy": 0.0
+      },
+      {
+        "vendor_history_lines": "1-2",
+        "n": 0,
+        "automation_rate": null,
+        "auto_post_accuracy": null,
+        "gl_accuracy": null
+      },
+      {
+        "vendor_history_lines": "3-9",
+        "n": 242,
+        "automation_rate": 1.0,
+        "auto_post_accuracy": 1.0,
+        "gl_accuracy": 1.0
+      },
+      {
+        "vendor_history_lines": "10-49",
+        "n": 7263,
+        "automation_rate": 0.5956,
+        "auto_post_accuracy": 0.8981,
+        "gl_accuracy": 0.7098
+      },
+      {
+        "vendor_history_lines": "50+",
+        "n": 13382,
+        "automation_rate": 0.5723,
+        "auto_post_accuracy": 0.8707,
+        "gl_accuracy": 0.6885
+      }
+    ],
+    "calibration": {
+      "bins": [
+        {
+          "band": "<0.5",
+          "n": 3381,
+          "accuracy": 0.315,
+          "mean_confidence": 0.4069,
+          "n_auto_posted": 0,
+          "auto_post_accuracy": null
+        },
+        {
+          "band": "0.5-0.7",
+          "n": 5344,
+          "accuracy": 0.5015,
+          "mean_confidence": 0.6012,
+          "n_auto_posted": 859,
+          "auto_post_accuracy": 0.4983
+        },
+        {
+          "band": "0.7-0.85",
+          "n": 5944,
+          "accuracy": 0.855,
+          "mean_confidence": 0.7861,
+          "n_auto_posted": 5150,
+          "auto_post_accuracy": 0.8903
+        },
+        {
+          "band": "0.85-0.95",
+          "n": 3442,
+          "accuracy": 0.9094,
+          "mean_confidence": 0.8961,
+          "n_auto_posted": 3442,
+          "auto_post_accuracy": 0.9094
+        },
+        {
+          "band": "0.95+",
+          "n": 2776,
+          "accuracy": 0.9557,
+          "mean_confidence": 0.9922,
+          "n_auto_posted": 2776,
+          "auto_post_accuracy": 0.9557
+        }
+      ],
+      "ece_all_predictions": 0.067,
+      "note": "confidence = 0.7*agreement + 0.3*mean similarity of agreeing lines; a heuristic score, not a trained probability"
+    },
+    "learning_curve_by_month": [
+      {
+        "month": "2025-10",
+        "invoices": 2624,
+        "automation_rate": 0.5995,
+        "auto_post_accuracy": 0.9161,
+        "gl_accuracy_all": 0.6902
+      },
+      {
+        "month": "2025-11",
+        "invoices": 2057,
+        "automation_rate": 0.5377,
+        "auto_post_accuracy": 0.9114,
+        "gl_accuracy_all": 0.6723
+      },
+      {
+        "month": "2025-12",
+        "invoices": 2742,
+        "automation_rate": 0.5489,
+        "auto_post_accuracy": 0.9156,
+        "gl_accuracy_all": 0.6645
+      },
+      {
+        "month": "2026-01",
+        "invoices": 2132,
+        "automation_rate": 0.5502,
+        "auto_post_accuracy": 0.8934,
+        "gl_accuracy_all": 0.6431
+      },
+      {
+        "month": "2026-02",
+        "invoices": 2317,
+        "automation_rate": 0.4812,
+        "auto_post_accuracy": 0.9112,
+        "gl_accuracy_all": 0.6331
+      },
+      {
+        "month": "2026-03",
+        "invoices": 2501,
+        "automation_rate": 0.5274,
+        "auto_post_accuracy": 0.9242,
+        "gl_accuracy_all": 0.6681
+      },
+      {
+        "month": "2026-04",
+        "invoices": 2907,
+        "automation_rate": 0.5263,
+        "auto_post_accuracy": 0.8693,
+        "gl_accuracy_all": 0.6216
+      },
+      {
+        "month": "2026-05",
+        "invoices": 2860,
+        "automation_rate": 0.5385,
+        "auto_post_accuracy": 0.8156,
+        "gl_accuracy_all": 0.5892
+      },
+      {
+        "month": "2026-06",
+        "invoices": 2850,
+        "automation_rate": 0.4793,
+        "auto_post_accuracy": 0.8053,
+        "gl_accuracy_all": 0.5589
+      }
+    ],
+    "vendor_most_common_baseline": {
+      "definition": "predict the vendor's most common TRUE account over all earlier lines (seed + every earlier replayed line, as if all were human-coded), on lines whose vendor was seen before",
+      "rows_with_vendor_seen_before": 22979,
+      "baseline_accuracy": 0.6998,
+      "system_gl_accuracy_same_rows": 0.6358,
+      "system_auto_post_accuracy_same_rows": 0.883,
+      "baseline_accuracy_on_the_rows_the_system_auto_posted": 0.8904,
+      "same_history_variant": {
+        "definition": "baseline restricted to the lines this arm's corpus holds (seed + write-backs)",
+        "rows": 20887,
+        "baseline_accuracy": 0.66
+      }
+    },
+    "enforcement": {
+      "forced_auto_post_attempts": 10763,
+      "refused": 10763
+    },
+    "agents_run_counts": {
+      "entity_agent": 22990,
+      "vat_agent": 22990
+    },
+    "seed_lines": 6363,
+    "seeded_vendors": 109,
+    "seconds": 277.0,
+    "agents_configuration": "neutral",
+    "replay_cutoff": "2025-10-01"
+  },
+  "agents_as_shipped_probe": {
+    "note": "first N replay lines, with-learning arm, agents exactly as shipped (UK VAT / entity config)",
+    "replay_lines": 3000,
+    "invoices": 3000,
+    "automation_rate": 0.0,
+    "auto_posted": 0,
+    "review_reasons": {
+      "vat_not_assessed": 1936,
+      "evidence_disagrees": 1031,
+      "no_or_thin_history": 33
+    },
+    "agent_flag_counts": {
+      "vat_not_assessed": 3000
+    },
+    "gl_accuracy_all_predictions": 0.7547
+  }
+}

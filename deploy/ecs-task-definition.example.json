@@ -1,0 +1,42 @@
+{
+  "family": "ap-automation",
+  "executionRoleArn": "YOUR_ECS_EXECUTION_ROLE_ARN",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "containerDefinitions": [
+    {
+      "name": "ap-automation",
+      "image": "YOUR_ECR_IMAGE_URI",
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 8080, "protocol": "tcp" }
+      ],
+      "environment": [
+        { "name": "PORT", "value": "8080" },
+        { "name": "ERP_BACKEND", "value": "simulated" },
+        { "name": "XERO_POSTING_ENABLED", "value": "false" },
+        { "name": "SAP_POSTING_ENABLED", "value": "false" },
+        { "name": "TELEMETRY_ENABLED", "value": "true" },
+        { "name": "CORS_ORIGINS", "value": "https://your-frontend.example" },
+        { "name": "QDRANT_HOST", "value": "YOUR_QDRANT_HOST" },
+        { "name": "QDRANT_PORT", "value": "6333" },
+        { "name": "QDRANT_COLLECTION", "value": "invoice_corpus" },
+        { "name": "LANGFUSE_HOST", "value": "https://cloud.langfuse.com" },
+        { "name": "SUPABASE_URL", "value": "YOUR_SUPABASE_URL" }
+      ],
+      "secrets": [
+        { "name": "API_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:API_KEY::" },
+        { "name": "OPENAI_API_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:OPENAI_API_KEY::" },
+        { "name": "ANTHROPIC_API_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:ANTHROPIC_API_KEY::" },
+        { "name": "QDRANT_API_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:QDRANT_API_KEY::" },
+        { "name": "LANGFUSE_PUBLIC_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:LANGFUSE_PUBLIC_KEY::" },
+        { "name": "LANGFUSE_SECRET_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:LANGFUSE_SECRET_KEY::" },
+        { "name": "SUPABASE_SECRET_KEY", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:SUPABASE_SECRET_KEY::" },
+        { "name": "XERO_CLIENT_ID", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:XERO_CLIENT_ID::" },
+        { "name": "XERO_CLIENT_SECRET", "valueFrom": "YOUR_SECRETS_MANAGER_ARN:ap-automation:XERO_CLIENT_SECRET::" }
+      ]
+    }
+  ]
+}

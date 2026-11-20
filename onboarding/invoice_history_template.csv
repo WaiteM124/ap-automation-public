@@ -1,0 +1,6 @@
+vendor_name,description,amount,currency,entity_id,cost_centre,gl_account
+Staples UK Ltd,A4 paper and printer toner,184.50,GBP,UK001,CC100,6100
+Microsoft Ireland,Microsoft 365 monthly licences,420.00,GBP,UK001,CC200,6200
+Smith & Partners LLP,Legal advice - lease review,1250.00,GBP,UK001,CC300,6300
+Trainline,Train tickets London to Manchester client visit,96.40,GBP,UK001,CC400,6400
+British Gas Business,Electricity - October,312.75,GBP,UK001,CC100,6500

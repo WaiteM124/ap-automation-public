@@ -1,0 +1,279 @@
+{
+  "config": {
+    "n_routine": 600,
+    "n_near_edge": 150,
+    "n_hard_edge": 50,
+    "seed": 42,
+    "history_per_vendor": 15,
+    "window": 100,
+    "live_embeddings": false,
+    "embeddings": "offline-hashing"
+  },
+  "with_learning": {
+    "review_reasons": {
+      "vat_review_required": 68,
+      "evidence_disagrees": 61,
+      "no_or_thin_history": 33,
+      "vendor_identity_uncertain": 32,
+      "cost_centre_mismatch": 10,
+      "entity_validation_failed": 2,
+      "vat_not_assessed": 2,
+      "vat_blocked": 2,
+      "vat_reverse_charge": 1
+    },
+    "new_to_corpus_vendors": {
+      "n": 74,
+      "automation_rate": 0.7973
+    },
+    "invoices": 800,
+    "automation_rate": 0.7362,
+    "auto_posted": 589,
+    "auto_post_accuracy": 0.9983,
+    "false_positives": 1,
+    "false_positive_rate_of_auto_posts": 0.0017,
+    "false_positive_rate_of_all_invoices": 0.0013,
+    "gl_accuracy_all_predictions": 0.9637,
+    "lines_learned_from_auto_posts": 0,
+    "cold_start": {
+      "n": 11,
+      "routed_to_review": 11,
+      "review_rate": 1.0
+    },
+    "by_category": {
+      "hard_edge": {
+        "n": 50,
+        "automation_rate": 0.0
+      },
+      "near_edge": {
+        "n": 150,
+        "automation_rate": 0.7533
+      },
+      "routine": {
+        "n": 600,
+        "automation_rate": 0.7933
+      }
+    },
+    "governance": {
+      "injected_anomalies": 21,
+      "caught": 21,
+      "catch_rate": 1.0,
+      "by_type": {
+        "blocked_vat": {
+          "n": 9,
+          "routed_to_review": 9
+        },
+        "reverse_charge": {
+          "n": 3,
+          "routed_to_review": 3
+        },
+        "wrong_cost_centre": {
+          "n": 4,
+          "routed_to_review": 4
+        },
+        "wrong_entity": {
+          "n": 5,
+          "routed_to_review": 5
+        }
+      }
+    },
+    "enforcement": {
+      "forced_auto_post_attempts": 211,
+      "refused": 211
+    },
+    "new_vendor_invoices_reviewed_before_first_auto_post": {
+      "GREENPATH_UTL": 4,
+      "CLEANZONE_FAC": 4,
+      "NOVACORP_SVCS": 4,
+      "SUMMIT_TRAIN": 4,
+      "DATABRIDGE_IT": 4
+    },
+    "windows": [
+      {
+        "invoices": "1-100",
+        "automation_rate": 0.66,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "101-200",
+        "automation_rate": 0.74,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "201-300",
+        "automation_rate": 0.71,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "301-400",
+        "automation_rate": 0.76,
+        "auto_post_accuracy": 0.9868
+      },
+      {
+        "invoices": "401-500",
+        "automation_rate": 0.68,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "501-600",
+        "automation_rate": 0.79,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "601-700",
+        "automation_rate": 0.75,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "701-800",
+        "automation_rate": 0.8,
+        "auto_post_accuracy": 1.0
+      }
+    ]
+  },
+  "no_learning_control": {
+    "review_reasons": {
+      "no_or_thin_history": 124,
+      "evidence_disagrees": 74,
+      "vat_review_required": 68,
+      "cost_centre_mismatch": 12,
+      "entity_validation_failed": 2,
+      "vat_not_assessed": 2,
+      "vat_blocked": 2,
+      "vat_reverse_charge": 1
+    },
+    "new_to_corpus_vendors": {
+      "n": 74,
+      "automation_rate": 0.0
+    },
+    "invoices": 800,
+    "automation_rate": 0.6438,
+    "auto_posted": 515,
+    "auto_post_accuracy": 0.9864,
+    "false_positives": 7,
+    "false_positive_rate_of_auto_posts": 0.0136,
+    "false_positive_rate_of_all_invoices": 0.0088,
+    "gl_accuracy_all_predictions": 0.8063,
+    "lines_learned_from_auto_posts": 0,
+    "cold_start": {
+      "n": 124,
+      "routed_to_review": 124,
+      "review_rate": 1.0
+    },
+    "by_category": {
+      "hard_edge": {
+        "n": 50,
+        "automation_rate": 0.0
+      },
+      "near_edge": {
+        "n": 150,
+        "automation_rate": 0.4
+      },
+      "routine": {
+        "n": 600,
+        "automation_rate": 0.7583
+      }
+    },
+    "governance": {
+      "injected_anomalies": 21,
+      "caught": 21,
+      "catch_rate": 1.0,
+      "by_type": {
+        "blocked_vat": {
+          "n": 9,
+          "routed_to_review": 9
+        },
+        "reverse_charge": {
+          "n": 3,
+          "routed_to_review": 3
+        },
+        "wrong_cost_centre": {
+          "n": 4,
+          "routed_to_review": 4
+        },
+        "wrong_entity": {
+          "n": 5,
+          "routed_to_review": 5
+        }
+      }
+    },
+    "enforcement": {
+      "forced_auto_post_attempts": 285,
+      "refused": 285
+    },
+    "new_vendor_invoices_reviewed_before_first_auto_post": {},
+    "windows": [
+      {
+        "invoices": "1-100",
+        "automation_rate": 0.65,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "101-200",
+        "automation_rate": 0.69,
+        "auto_post_accuracy": 0.9855
+      },
+      {
+        "invoices": "201-300",
+        "automation_rate": 0.69,
+        "auto_post_accuracy": 0.9855
+      },
+      {
+        "invoices": "301-400",
+        "automation_rate": 0.68,
+        "auto_post_accuracy": 0.9559
+      },
+      {
+        "invoices": "401-500",
+        "automation_rate": 0.5,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "501-600",
+        "automation_rate": 0.65,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "601-700",
+        "automation_rate": 0.63,
+        "auto_post_accuracy": 1.0
+      },
+      {
+        "invoices": "701-800",
+        "automation_rate": 0.66,
+        "auto_post_accuracy": 0.9697
+      }
+    ]
+  },
+  "claims": [
+    {
+      "claim": "Automation improves through write-back alone",
+      "passed": true,
+      "detail": "overall 73.6% vs 64.4% for the no-learning control; vendors that began with no history: 79.7% vs 0.0%"
+    },
+    {
+      "claim": "Cold-start invoices are routed to review",
+      "passed": true,
+      "detail": "11/11 vendors-with-no-history routed to review"
+    },
+    {
+      "claim": "Unknown-vendor (hard-edge) invoices are routed to review",
+      "passed": true,
+      "detail": "hard-edge automation rate 0%"
+    },
+    {
+      "claim": "Injected governance anomalies are caught",
+      "passed": true,
+      "detail": "21/21 routed to review"
+    },
+    {
+      "claim": "A rejected prediction cannot be force-posted",
+      "passed": true,
+      "detail": "211/211 forced attempts refused"
+    },
+    {
+      "claim": "The system never learns from its own auto-posts",
+      "passed": true,
+      "detail": "0 auto-posted lines were written back"
+    }
+  ]
+}

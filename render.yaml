@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: ap-automation-api
+    runtime: python
+    region: frankfurt
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: QDRANT_HOST
+        sync: false
+      - key: QDRANT_PORT
+        value: "443"
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: LANGFUSE_PUBLIC_KEY
+        sync: false
+      - key: LANGFUSE_SECRET_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      # Set API_KEY to require an X-API-Key header on /predict, /confirm and /batch.
+      - key: API_KEY
+        generateValue: true
+      # Comma-separated list of allowed browser origins ("*" allows any).
+      - key: CORS_ORIGINS
+        value: "*"

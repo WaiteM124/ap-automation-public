@@ -1,0 +1,51 @@
+invoice_id,raw_vendor_name,description,amount,currency,entity_id,cost_centre,category,ground_truth_gl
+002e83ad-ea3b-4375-8fab-50d9fc2d312b,TechSource IT Solutions,Cloud infrastructure services Q2,11252.48,GBP,IE001,CC100,routine,6200
+8d676e6b-45c2-457c-8f55-0a5863e6b976,Apex Equipment Co,Server hardware purchase,49286.94,GBP,UK001,CC200,routine,7100
+05d6b3fe-fbe9-416e-9a9d-1e24fdade0b6,Apex Co.,Network equipment installation,6990.2,GBP,UK002,CC500,routine,7100
+9c695e70-c58c-4834-888c-80e8b4b70a80,Swift Travel Services,Flight and hotel Q4,2312.6,GBP,UK002,CC200,routine,6500
+11a0eecb-530a-409e-9580-ed0c1255a9b5,Horizon Consulting,HR consulting project,4350.84,GBP,UK002,CC500,routine,6400
+85f4517b-7c06-428d-9f29-f3b474e3505c,Swift Travel Services,Conference accommodation and travel,2229.74,EUR,UK001,CC500,routine,6500
+081a6fa7-7cf6-4399-abcd-bdc8a3f32cd6,SwiftTravel,Rail travel and expenses,1912.78,GBP,UK001,CC200,routine,6500
+a7928e56-332f-428b-b092-dd8ddfb6227c,Swift Travel Services,Business travel accommodation,2587.66,GBP,UK002,CC300,routine,6500
+ee6760c6-2394-499d-847d-212585d01341,Global Office Ltd,Monthly office supplies order,316.45,USD,IE001,CC200,routine,6100
+49983517-e141-421a-9f8e-d08709bfb79c,Apex Co.,Capital equipment acquisition,23360.82,GBP,IE001,CC500,routine,7100
+570aeeee-cf2f-4fc1-b4ab-2c8687f2a263,Horizon Group Ltd,Management consulting services,9458.5,GBP,UK002,CC400,routine,6400
+f9cba501-619d-4a7c-84e5-7a4d57927a98,Swift Travel Services,Conference accommodation and travel,751.3,GBP,IE001,CC400,routine,6500
+7286e39f-d63f-45b7-aa9d-ae1c9d625bc1,Brandworks Agency,Brand design and production,9718.19,GBP,IE001,CC500,routine,6700
+63675650-9314-4e4a-b205-f70ba031da12,Apex Equipment Ltd,Capital equipment acquisition,61026.04,GBP,UK001,CC200,routine,7100
+76bbee0f-5675-4ccb-8547-699c5d784cd5,Apex Equipment Ltd,Server hardware purchase,11818.21,GBP,IE001,CC200,routine,7100
+02a1044a-87d4-47c6-b18a-85e849d61263,Brandworks Agency,PR retainer monthly,2207.03,USD,UK002,CC500,routine,6700
+e8bd2631-0874-44cd-9ee1-edc89b1a07e1,Meridian Fac. Ltd,Pest control and grounds maintenance,3659.46,GBP,UK001,CC300,routine,6300
+5b5b9e26-8871-400e-aa4c-abe5af273879,Brandworks Marketing,Brand design and production,9620.75,USD,UK001,CC300,routine,6700
+80cd1a35-20d2-4dd6-9c62-76d4eabce46d,Apex Co.,Production machinery purchase,19918.33,USD,IE001,CC100,routine,7100
+ac5d7a64-8002-4cfd-bf99-576550e53c76,Powerline Util. Ltd,Water rates quarterly,333.11,GBP,UK001,CC200,routine,6600
+b02dbe9d-11f9-4794-9284-2128d5a02393,TechSource IT Solutions,Annual software licence renewal,11112.66,GBP,IE001,CC400,routine,6200
+5ee28122-9bec-4e0e-bc04-8480bf8a9af3,Apex Equipment Co,Capital equipment acquisition,24879.25,USD,IE001,CC200,routine,7100
+2e451935-92f5-4f8c-b959-009beee72f1c,Swift Travel Ltd,Rail travel and expenses,2986.18,USD,UK002,CC100,routine,6500
+618a064b-30c4-47f5-97d5-f6459005ecba,Horizon Consulting Group,Management consulting services,3472.6,USD,UK001,CC100,routine,6400
+c428c719-73cc-4ce9-8da3-9683201a6da0,Tech Source Ltd,Cloud infrastructure services Q1,9650.99,GBP,UK002,CC100,routine,6200
+f080db09-46c2-4e4e-aa60-f58a955dd9b9,Apex Equipment Co,Capital equipment acquisition,25885.79,USD,UK001,CC500,routine,7100
+dd4426dc-93fb-4996-a414-8ae301fd5cc8,Learn Forward Training,Technical skills workshop,4030.79,GBP,UK001,CC400,routine,6800
+18dd4e27-65ae-4a64-8b87-ae7b904806e6,Powerline Util. Ltd,Electricity supply monthly,998.87,GBP,UK002,CC300,routine,6600
+6d25232c-b5ae-47dc-84d3-dd87305c23af,TechSource IT Solutions,Cybersecurity platform licence,3278.06,GBP,UK002,CC200,routine,6200
+ad6f74c7-6bef-4e8b-b0ac-f510da3f2e24,Swift Travel Ltd,Business travel accommodation,861.95,USD,UK001,CC100,routine,6500
+2cc43b5f-4e69-4c22-8e99-5637a05beb63,Apex Equipment Co,Network equipment installation,77674.72,EUR,UK002,CC400,routine,7100
+ca0da90b-1f15-4aa6-9a5a-7fea3a98a8e7,Horizon Consulting,Legal advisory fees Q4,22756.19,GBP,UK002,CC300,routine,6400
+586271c2-09b7-438b-984b-aa04d59a26e8,LearnForward Ltd,Professional development programme,2403.53,GBP,UK001,CC300,routine,6800
+18c7e413-89ad-4720-bfbf-a0211066691a,Horizon Consulting Group,Financial advisory retainer,15321.15,GBP,UK001,CC100,routine,6400
+6459f157-e1e2-4a92-aa0d-5e532341e253,Learn Forward,Professional development programme,4637.24,GBP,IE001,CC100,routine,6800
+3481c372-ee91-47d2-834a-d53c51ddcaa3,Global Office Supplies,"Paper, pens and office supplies Q4",496.28,GBP,IE001,CC200,routine,6100
+a58cd350-3fd8-4220-85f4-bae47986e1a9,Meridian Fac. Ltd,Pest control and grounds maintenance,593.52,GBP,UK001,CC300,routine,6300
+18090972-72b0-4db1-9160-c47246cd4dcf,Horizon Consulting,Audit and assurance services,11103.07,GBP,UK001,CC100,routine,6400
+7ac96ce9-009b-4758-ab14-9eb64a3ef62e,Learn Forward,Staff training programme,4993.04,USD,UK001,CC500,routine,6800
+03bf1bc4-4c72-4916-a5f3-1205c52f947a,Swift Travel Services,Business travel accommodation,2809.79,GBP,UK002,CC200,routine,6500
+ed0c24b8-4b91-4e01-8765-df51b1616557,Learn Forward,Professional development programme,3665.93,USD,UK002,CC100,routine,6800
+50309582-4952-45c0-811f-958af5e5bc6a,Global Office Ltd,Office stationery and printer consumables,136.57,GBP,UK002,CC500,routine,6100
+7fc94184-9f35-4ee3-ac1c-29d50e3b44ea,Horizon Group Ltd,Audit and assurance services,9886.25,GBP,UK001,CC100,routine,6400
+894bd51c-6a64-44eb-8a76-0c12260edfd2,BrandWorks Ltd,Brand design and production,1837.65,GBP,UK001,CC400,routine,6700
+761257a7-1f29-4d8e-95ea-2dee46c4326f,Apex Co.,Server hardware purchase,37076.52,GBP,IE001,CC200,routine,7100
+61888b6c-e24b-4981-ade0-54c1de82f682,Apex Equipment Co,Network equipment installation,67594.63,GBP,UK001,CC300,routine,7100
+3433b821-7993-4c27-be24-7b2aac211924,Powerline Utilities,Gas and electricity Q2,1828.17,GBP,UK002,CC500,routine,6600
+424f1765-cec9-4e38-9dae-0e5ca40ab519,Brandworks Agency,Social media advertising Q2,15240.07,GBP,UK002,CC100,routine,6700
+628052c3-b4e4-4056-b36c-77c9c13de8a8,Global Office,Printer cartridges and stationery,743.37,GBP,UK001,CC100,routine,6100
+ce0c38bb-991d-4686-b38a-1d8470719b6c,Brandworks Marketing,Social media advertising Q2,17313.27,EUR,UK002,CC300,routine,6700

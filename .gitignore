@@ -1,0 +1,35 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+data/*.db
+data/public/
+data/langfuse_analysis/
+credentials/
+*.log
+.DS_Store
+*.bak
+~$*.docx
+~$*.pptx
+~$*.xlsx
+jira_created.json
+data/client_chart.json
+data/client_vendors.csv
+data/xero_tokens.json
+data/xero_tokens.json.lock
+data/.xero_tokens.*.tmp
+task-definition.json
+service.json
+.langgraph_api/
+docs/POC Pack/langfuse_events_export.csv
+docs/POC Pack/langfuse_scores_export.csv
