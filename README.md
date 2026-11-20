@@ -6,6 +6,10 @@ Predicts the GL code for non-PO invoice lines from the company's own coding hist
 
 This repository is a portfolio / showcase copy of a private proof of concept. It contains **synthetic** invoice data and public-data replay results only. It does not include live credentials, cloud account identifiers, or client ledgers.
 
+**Platform architecture:** this POC is the first proving ground for a governed enterprise agentic AI platform, in which models provide evidence, policy owns decisions and humans keep authority over financial actions. See [ARCHITECTURE.md](ARCHITECTURE.md) and the [14-slide strategy deck](docs/architecture-strategy.pdf).
+
+![Target architecture](docs/target-architecture.png)
+
 ## How it decides
 
 Every invoice line gets two decisions. Only the second can authorise a posting.
