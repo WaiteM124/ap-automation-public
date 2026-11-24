@@ -31,6 +31,6 @@ services:
       # Set API_KEY to require an X-API-Key header on /predict, /confirm and /batch.
       - key: API_KEY
         generateValue: true
-      # Comma-separated list of allowed browser origins ("*" allows any).
+      # Explicit allow-list only — do not use "*" in shared environments (see AGENTS.md).
       - key: CORS_ORIGINS
-        value: "*"
+        value: "https://your-frontend.example"

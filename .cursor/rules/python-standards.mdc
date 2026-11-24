@@ -1,0 +1,16 @@
+---
+description: Python engineering standards for AP automation and tests
+globs: "**/*.py"
+alwaysApply: false
+---
+
+# Python standards
+
+Canonical detail: `AGENTS.md`.
+
+- Target **Python 3.12+**. Type hints on public APIs; **Pydantic v2** / typed contracts at API, persistence, and ERP boundaries.
+- Prefer existing patterns in `ap_automation/core`, `agents`, `graph`, and `main.py`. Routing and posting changes must preserve fail-closed behaviour and `post_outcome` as the only write path.
+- Do not log secrets (API keys, SAP/Xero credentials, tokens). Prefer structured logs with prediction / invoice ids when available.
+- Tests are the spec: known-answer cases for the gate, `AutoPostNotPermitted`, and human-only learning. Place tests under `tests/`.
+- Before finishing: `ruff check main.py ap_automation tests scripts/run_demo.py scripts/evaluate_poc.py scripts/check_eval_gate.py` and `pytest -q`. If routing or thresholds change, run `python scripts/check_eval_gate.py`.
+- Do not mass-reformat unrelated files. Do not bump dependency or model versions unless the task asks for it.

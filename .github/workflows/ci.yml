@@ -1,3 +1,15 @@
+# Lint, unit tests, and offline synthetic eval gate.
+#
+# Assumptions:
+# - Python 3.12, matching pyproject.toml.
+# - ruff is pinned in [project.optional-dependencies] dev and installed via pip install -e ".[dev]".
+# - pytest suite is fully offline (no API keys).
+# - Eval gate runs scripts/check_eval_gate.py: lexical embedder, in-memory Qdrant,
+#   seed 42, compare to docs/evaluation.json. Tolerances documented in that script
+#   (ACCURACY_TOLERANCE=0.002, AUTOMATION_TOLERANCE=0.01). Runtime ~10–20s — every PR.
+# - This workflow does not deploy and does not use repository secrets.
+# - No ruff format --check yet (avoids mass-reformat).
+
 name: ci
 
 on:
@@ -16,6 +28,22 @@ jobs:
           cache: pip
       - run: pip install -e ".[dev]"
       - name: Lint
-        run: ruff check main.py ap_automation tests scripts/run_demo.py scripts/evaluate_poc.py
+        run: >
+          ruff check main.py ap_automation tests
+          scripts/run_demo.py scripts/evaluate_poc.py scripts/check_eval_gate.py
       - name: Tests
         run: pytest -q
+
+  eval-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Offline eval gate (synthetic)
+        env:
+          TELEMETRY_ENABLED: "false"
+        run: python scripts/check_eval_gate.py

@@ -10,6 +10,7 @@ This folder is the concise public set. Duplicate POC packs, slide decks and bulk
 | [JIRA_SETUP.md](JIRA_SETUP.md) | Idempotent Jira project/ticket setup used in the POC |
 | [case_study_la_checkbook.md](case_study_la_checkbook.md) | Public-data replay on Los Angeles Checkbook invoices |
 | [evaluation.json](evaluation.json) | Saved result of `python scripts/evaluate_poc.py` (synthetic, offline, seed 42) |
+| [decisions/](decisions/) | Architecture decision records (fail-closed gate, human-only learning, shadow auto-post) |
 | [public_replay_offline.json](public_replay_offline.json) / [public_replay_live.json](public_replay_live.json) | Saved LA Checkbook replay summaries (offline hashing vs live embeddings) |
 | [architecture/](architecture/) | Mermaid sources for the RAG bot, ERP-agent and combined overviews |
 | [assets/](assets/) | UI screenshots (gate, LangGraph, Langfuse trace) |
