@@ -6,6 +6,8 @@ Predicts the GL code for non-PO invoice lines from the company's own coding hist
 
 This repository is a portfolio / showcase copy of a private proof of concept. It contains **synthetic** invoice data and public-data replay results only. It does not include live credentials, cloud account identifiers, or client ledgers.
 
+Contributor and agent guide: [AGENTS.md](AGENTS.md) · [CONTRIBUTING.md](CONTRIBUTING.md) · [docs/decisions/](docs/decisions/).
+
 **Platform architecture:** this POC is the first proving ground for a governed enterprise agentic AI platform, in which models provide evidence, policy owns decisions and humans keep authority over financial actions. See [ARCHITECTURE.md](ARCHITECTURE.md) and the [14-slide strategy deck](docs/architecture-strategy.pdf).
 
 ![Target architecture](docs/target-architecture.png)
@@ -92,9 +94,10 @@ A separate public-data replay (Los Angeles Checkbook) is described in [docs/case
 pip install -e ".[dev]"            # or: pip install -r requirements.txt
 pytest                             # 348 tests collected; 347 passed, 1 skipped, fully offline
 python scripts/evaluate_poc.py     # the measurements above, fully offline
+python scripts/check_eval_gate.py  # same + compare to docs/evaluation.json (CI eval gate)
 ```
 
-CI (GitHub Actions) runs `ruff check` and `pytest` on every push and pull request to `main`. No secrets are required.
+CI (GitHub Actions) runs pinned `ruff check`, `pytest`, and the offline **eval gate** (`scripts/check_eval_gate.py` vs `docs/evaluation.json`) on every push and pull request to `main`. No secrets are required. Eval numbers are **synthetic**.
 
 ### Recorded demo (deterministic)
 

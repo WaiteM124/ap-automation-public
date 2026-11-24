@@ -1,0 +1,18 @@
+---
+description: Non-negotiable AP automation product and contribution rules
+alwaysApply: true
+---
+
+# AP core rules
+
+Canonical detail: `AGENTS.md`.
+
+- **Fail closed.** Errors, retrieval outages, agent exceptions, thin evidence, or non-UK entities → `human_review`, never `auto_post`.
+- **LLM gate only tightens.** Keep `governance.never_loosen`; model output must not relax routing.
+- **Post only via `core/posting.py::post_outcome`.** Keep `AutoPostNotPermitted`. No direct ERP writes.
+- **Learn from humans only.** Never write auto-posts back to the corpus or use them as evidence.
+- **Vendor-scoped evidence.** `MIN_EVIDENCE_LINES` from the resolved vendor only; no cross-vendor fallback. Threshold changes need eval + ADR.
+- **Posting flags stay false in committed config** (`SAP_POSTING_ENABLED`, `XERO_POSTING_ENABLED`, `SAP_ALLOW_NON_SANDBOX`). No secrets; no `CORS_ORIGINS=*` in deploy config.
+- **Do not bypass audit writes** in `post_outcome`. Specialist agents stay deterministic rules (LLM addition = ADR).
+- **Eval numbers are synthetic** — label them in docs/PRs. Do not weaken tests or eval thresholds to green CI.
+- Prefer matching existing patterns. State assumptions in the PR. When rules conflict, `AGENTS.md` wins.
